@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:gravity="center_horizontal"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp">
+
+        <Button
+            android:id="@+id/new_recording"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:text="Record New"
+            android:padding="16dp"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/choose_file"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choose File"
+            android:padding="16dp"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="#d6ecff"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/original_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Original Audio"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/original_file"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/original_label"
+                    android:text="No file chosen"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/play_original"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/original_file"
+                    android:layout_below="@id/original_file"
+                    android:text="Play" />
+
+                <Button
+                    android:id="@+id/stop_original"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/play_original"
+                    android:layout_toRightOf="@id/play_original"
+                    android:text="Stop" />
+
+                <Button
+                    android:id="@+id/run"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/play_original"
+                    android:layout_toRightOf="@id/stop_original"
+                    android:text="Run" />
+
+                <com.wangeric3.denoiser.SpectrogramView
+                    android:id="@+id/original_SV"
+                    android:layout_width="match_parent"
+                    android:layout_height="96dp"
+                    android:layout_alignLeft="@id/play_original"
+                    android:layout_below="@id/play_original"
+                    android:layout_marginTop="4dp" />
+            </RelativeLayout>
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="#d6ecff"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/clean_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Denoised Audio"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/clean_file"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/clean_label"
+                    android:text="No file chosen"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/play_clean"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/clean_file"
+                    android:layout_below="@id/clean_file"
+                    android:text="Play" />
+
+                <Button
+                    android:id="@+id/stop_clean"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/play_clean"
+                    android:layout_toRightOf="@id/play_clean"
+                    android:text="Stop" />
+
+                <com.wangeric3.denoiser.SpectrogramView
+                    android:id="@+id/clean_SV"
+                    android:layout_width="match_parent"
+                    android:layout_height="96dp"
+                    android:layout_alignLeft="@id/play_clean"
+                    android:layout_below="@id/play_clean"
+                    android:layout_marginTop="4dp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
