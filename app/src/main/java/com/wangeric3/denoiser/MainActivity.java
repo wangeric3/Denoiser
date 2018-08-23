@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private TensorFlowInferenceInterface tfHelper;
     private static final String inputName = "REG_Net/Intputs/x";
     private static final String outputName = "REG_Net/DNN/Add_4";
-    private static final String modelName = "DDAEFULL3.pb";
+    private static final String modelName = "DDAE.pb";
     String[] outputNames = new String[]{outputName};
 
     File saveDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Denoiser");
