@@ -52,7 +52,6 @@ public class SpectrogramView extends SurfaceView implements Runnable {
                     case 1:
                         break;
                     case 2:
-                        Log.d("SpecView","Clearing");
                         mCanvas = mSurfaceHolder.lockCanvas();
                         mCanvas.drawColor(Color.rgb(150,150,150));
                         mSurfaceHolder.unlockCanvasAndPost(mCanvas);
@@ -116,7 +115,7 @@ public class SpectrogramView extends SurfaceView implements Runnable {
         float X = C * (1-abs((245/60) % 2 - 1));
         float m = L - C/2;
 
-        rgb[0] = Math.round((X+m) * 255);
+        rgb[0] = Math.round((X + m) * 255);
         rgb[1] = Math.round((m) * 255);
         rgb[2] = Math.round((C + m) * 255);
         return rgb;
@@ -140,7 +139,6 @@ public class SpectrogramView extends SurfaceView implements Runnable {
     public void clear(){
         process = 2;
         if (mSurfaceHolder.getSurface().isValid()){
-            Log.d("SpecView","Clearing");
             mCanvas = mSurfaceHolder.lockCanvas();
             mCanvas.drawColor(Color.rgb(150,150,150));
             mSurfaceHolder.unlockCanvasAndPost(mCanvas);
