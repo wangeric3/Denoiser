@@ -1,5 +1,5 @@
 # Denoiser
-Android app for demonstrating the speech enhancing capabilities of the Deep Denoising AutoEncoder (DDAE) that is capable of audio recording, playback and de-noising with a pre-trained DNN model. 
+Android app for demonstrating the speech enhancing of the Deep Denoising AutoEncoder (DDAE). It is is capable of audio recording, playback and de-noising with a pre-trained DNN Tensorflow model. 
 
 
 Target SDK 26
