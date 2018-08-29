@@ -43,8 +43,10 @@ public class FileChooser extends AppCompatActivity {
 
         ListView storedFiles = (ListView)findViewById(R.id.list);
 
-        FileAdapter adapter = new FileAdapter(this, files);
-        storedFiles.setAdapter(adapter);
+        if (files != null) {
+            FileAdapter adapter = new FileAdapter(this, files);
+            storedFiles.setAdapter(adapter);
+        }
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
