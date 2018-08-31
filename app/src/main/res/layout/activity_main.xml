@@ -9,31 +9,65 @@
     android:gravity="center_horizontal"
     android:padding="16dp">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/Model"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Model: "
+            android:textSize="17sp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:id="@+id/model_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/Model"
+            android:scrollHorizontally="false"
+            android:text="None"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/switch_model"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Switch"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="24dp">
+        android:layout_marginTop="8dp" >
 
         <Button
             android:id="@+id/new_recording"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
-            android:text="Record New"
             android:padding="16dp"
-            android:textSize="18sp" />
+            android:text="Record New"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <Button
             android:id="@+id/choose_file"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Choose File"
             android:padding="16dp"
-            android:textSize="18sp" />
+            android:text="Choose File"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     </LinearLayout>
+
     <View
+        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@android:color/darker_gray"/>
@@ -61,7 +95,7 @@
                     android:layout_height="wrap_content"
                     android:text="Original Audio"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/original_file"
@@ -69,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/original_label"
                     android:text="No file chosen"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
 
                 <Button
                     android:id="@+id/play_original"
@@ -118,7 +152,7 @@
                     android:layout_height="wrap_content"
                     android:text="Denoised Audio"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/clean_file"
@@ -126,7 +160,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/clean_label"
                     android:text="No file chosen"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
 
                 <Button
                     android:id="@+id/play_clean"

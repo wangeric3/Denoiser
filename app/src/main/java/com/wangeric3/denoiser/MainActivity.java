@@ -1,6 +1,9 @@
 package com.wangeric3.denoiser;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
@@ -26,9 +29,9 @@ import static android.Manifest.permission.RECORD_AUDIO;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView originalName, cleanName;
+    private TextView originalName, cleanName, modelLabel;
     private Button runDenoiser, playOriginal, stopOriginal, buttonChangeFile, buttonNewRecording,
-    playClean, stopClean;
+    switchModel, playClean, stopClean;
     private SpectrogramView originalSpectrogram, cleanSpectrogram;
 
     public static final int RequestPermissionCode = 1;
@@ -38,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
     private TensorFlowInferenceInterface tfHelper;
     private static final String inputName = "REG_Net/Intputs/x";
     private static final String outputName = "REG_Net/DNN/Add_4";
-    private static final String modelName = "DDAE.pb";
+    private String modelName;
+    String[] modelNames;
     String[] outputNames = new String[]{outputName};
 
     File saveDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Denoiser");
@@ -50,23 +54,32 @@ public class MainActivity extends AppCompatActivity {
     MediaPlayer originalMP, cleanMP;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tfHelper = new TensorFlowInferenceInterface(getAssets(), modelName);
-
         originalName = (TextView) findViewById(R.id.original_file);
         cleanName = (TextView) findViewById(R.id.clean_file);
+        modelLabel = (TextView) findViewById(R.id.model_label);
         playOriginal = (Button) findViewById(R.id.play_original);
         stopOriginal = (Button) findViewById(R.id.stop_original);
         playClean = (Button) findViewById(R.id.play_clean);
         stopClean = (Button) findViewById(R.id.stop_clean);
         buttonChangeFile = (Button) findViewById(R.id.choose_file);
         buttonNewRecording = (Button) findViewById(R.id.new_recording);
+        switchModel = (Button) findViewById(R.id.switch_model);
         runDenoiser = (Button) findViewById(R.id.run);
         cleanSpectrogram = (SpectrogramView) findViewById(R.id.clean_SV);
         originalSpectrogram = (SpectrogramView) findViewById(R.id.original_SV);
+
+        try{
+            modelNames = getAssets().list("models");
+        } catch (IOException e){
+            Toast.makeText(MainActivity.this,"models folder not found", Toast.LENGTH_SHORT).show();
+        }
+        modelName = modelNames[0];
+        modelLabel.setText(modelName.substring(0,modelName.length()-3));
+        tfHelper = new TensorFlowInferenceInterface(getAssets(), "models/" + modelName);
 
         playOriginal.setEnabled(false);
         stopOriginal.setEnabled(false);
@@ -193,6 +206,12 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     requestPermission();
                 }
+            }
+        });
+        switchModel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switchModelDialog().show();
             }
         });
 
@@ -339,6 +358,19 @@ public class MainActivity extends AppCompatActivity {
         String[] split = filePath.split("/");
         String name = split[split.length-1];
         return name.substring(0,name.length()-4);
+    }
+
+    public Dialog switchModelDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("Choose a Model")
+                .setItems(modelNames, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        modelName = modelNames[which];
+                        tfHelper = new TensorFlowInferenceInterface(getAssets(), "models/" + modelName);
+                        modelLabel.setText(modelName.substring(0,modelName.length()-3));
+                    }
+                });
+        return builder.create();
     }
 }
 
